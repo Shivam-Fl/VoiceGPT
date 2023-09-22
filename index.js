@@ -1,11 +1,13 @@
 import OpenAI from "openai";
 import * as readline from "node:readline/promises";
 import {stdin as input, stdout as output} from "node:process";
+require("dotenv").config();
+const OpenAIKEY = process.env.OPEN_AI_KEY;
 
 const rl = readline.createInterface({input,output})
 var messages = [];
 const openai = new OpenAI({
-  apiKey: "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", // defaults to process.env["OPENAI_API_KEY"]
+  apiKey: OpenAIKEY, 
 });
 
 async function main(input) {

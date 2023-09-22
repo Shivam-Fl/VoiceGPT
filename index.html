@@ -5,26 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoiceGPT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 </head>
 
-<body class="bg-gray-600 h-[100vh]">
-   <nav class="bg-gray-900 w-full p-4">
-    <h1 class="text-5xl font-bold text-gray-100">VoiceGPT</h1>
-   </nav>
-    <main >
-        <div class="container-fluid my-4 bg-primary chats">
-           
+<body class="bg-gray-700 h-[100vh] text-xl text-gray-200">
+    <nav class="bg-gray-800 w-full p-4">
+        <h1 class="text-5xl font-bold text-gray-100">VoiceGPT</h1>
+    </nav>
+    <main>
+        <div class="my-4 bg-primary chats  mx-10 border border-gray-700  rounded-lg px-40 flex flex-col gap-y-6 ">
+
         </div>
-        <div class="absolute bottom-4 h-16 w-[100vw] flex  ">
-            <input id="prompt" class="basis-2/3 bg-gray-600 border rounded-3xl border-gray-900 mx-10 shadow" type="text">
-            <div class="basis-1/3 h-16"> <button id="start" type="button" class="bg-gray-900 text-gray-100 text-3xl  p-4 rounded-3xl border ">Start</button>
-                <button id="voiceInput" type="button" class="bg-gray-900 text-gray-100 text-3xl  p-4 rounded-3xl border ">Voice</button><button id="stop" type="button" class="bg-gray-900 text-gray-100 text-3xl  p-4 rounded-3xl border ">Stop</button>
-            </div>
+        <div class="absolute bottom-4 h-16 w-[100vw] px-72 flex gap-x-4 ">
+            
+                <input id="prompt" class="basis-4/5 bg-gray-600 border-gray-600 border rounded-lg h-16 shadow-lg px-10"
+                    type="text">
+                <div class="basis-1/5  flex gap-x-4 "> <button id="start" type="button" class="text-gray-500 hover:text-gray-300 hover:scale-125 text-3xl self-center justify-center  "><i class="fa-solid fa-play "></i></button>
+                    <button id="voiceInput" type="button" class="text-gray-500 hover:text-gray-300 hover:scale-125 text-3xl self-center justify-center  "><i
+                            class="fa-solid fa-microphone "></i></button><button id="stop" type="button"
+                        class="text-gray-500 hover:text-gray-300 hover:scale-125 text-3xl self-center justify-center  "><i class="fa-thin fa-stop"></i></button>
+                </div>
+
             
         </div>
-       
+
+        </div>
+
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -73,9 +83,9 @@
                         // Send the recognized text to the server
                         postData("/api", { input: transcript }).then((data) => {
                             console.log(data.message); // JSON data parsed by `data.json()` call
-                            outputDiv.innerHTML += `<p>
-                                <li>
-                                    ${transcript} <br>
+                            outputDiv.innerHTML += `<p class="rounded-lg ">
+                                <h2 class="bg-gray-900 px-10"> ${transcript}  </h2>
+                                <li class="bg-gray-500 px-10">
                                     Ans: ${data.message}
                                 </li>
                             </p>`;
@@ -109,13 +119,14 @@
             // Send the typed input to the server
             postData("/api", { input }).then((data) => {
                 console.log(data.message); // JSON data parsed by `data.json()` call
-                outputDiv.innerHTML += `<p>
-                    <li>
-                        ${input} <br>
+                outputDiv.innerHTML += ` <div class="border border-gray-800 shadow-lg  rounded-lg"> <p class="">
+                    <h2 class="bg-gray-800 py-4 px-10"> ${input}  </h2>
+                    <p class="bg-gray-600 py-4 px-10">
                         Ans: ${data.message}
-                    </li>
-                </p>`;
+                    </p>
+                </p> </div>`;
             });
+            
         });
 
         // Event listener for the "Stop" button
